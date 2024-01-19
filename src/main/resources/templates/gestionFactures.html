@@ -1,0 +1,74 @@
+<!-- gestionClients.html -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Factures</title>
+    <link rel= "stylesheet"
+ type ="text/css" 
+ href= "../static/css/bootstrap.min.css"
+ th:href="@{/css/bootstrap.min.css}"
+/>
+
+</head>
+<body>
+
+    <h2>Liste des Factures</h2>
+
+	<div class="container">
+<form th:action="@{factures}" method="get" >
+ <label>Mot Clé (client id):</label>
+ <input type="text" name ="motCle" th:value="${motCle}"/>
+ <button class ="btn btn-primary"> Chercher </button>
+</form>
+</div>
+
+	 <a th:href="@{/gestion/form3}"> <!-- Lien vers le formulaire d'ajout -->
+        <button>Ajouter</button>
+    </a>
+	
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>montant</th>
+                <th>montant regle</th>
+                
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Utilisation de Thymeleaf pour itérer sur la liste de devises -->
+       <!-- Utilisation de Thymeleaf pour itérer sur la liste de clients -->
+<tr th:each="f:${pageFactures.content}">
+    <td th:text="${f.id}"></td>
+	<td th:text="${f.montant}"></td>  
+	<td th:text="${f.montantRegle}"></td>
+	
+	
+ 
+    <td> <a th:href="@{edit3(id=${f.id})}" >Editer</a></td>
+    <td>
+        <a onclick="return confirm('Confirmez-vous la suppression de ce facture?')"
+   th:href="@{delete3(id=${f.id}, page=${pageCourante}, motCle=${motCle})}">
+    Supprimer
+</a>
+
+    </td>
+</tr>
+
+
+        </tbody>
+    </table>
+<div class ="container">
+<ul class ="nav nav-pills" >
+ <li th:each ="p:${pages}" th:class="${p==pageCourante}?active:''" >
+ <a th:text ="${p}" th:href ="@{factures(page =${p}, motCle =${motCle})}"></a>
+ </li>
+</ul>
+</div>
+</body>
+</html>

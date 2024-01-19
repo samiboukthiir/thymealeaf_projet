@@ -1,0 +1,30 @@
+<!-- clientForm.html -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Form</title>
+</head>
+<body>
+
+    <h2>Client Form</h2>
+
+    <form th:action="${client.id != null ? '/gestion/clients/edit/' + client.id : '/gestion/clients/add'}" method="post">
+        <label for="nom">Nom:</label>
+        <input type="text" id="nom" name="nom" th:field="*{nom}" required/>
+
+        <label for="prenom">Prénom:</label>
+        <input type="text" id="prenom" name="prenom" th:field="*{prenom}" required/>
+
+        <!-- Ajout d'un champ caché pour l'ID lors de la modification -->
+        <input type="hidden" th:field="*{id}"/>
+
+        <button type="submit">Sauvegarder</button>
+        <a th:href="@{/gestion/clients}" class="button">Annuler</a>
+    </form>
+
+</body>
+</html>

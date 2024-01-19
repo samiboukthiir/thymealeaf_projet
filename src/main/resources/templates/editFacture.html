@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout3}">
+<head>
+    <meta charset="utf-8"/>
+    <title>Fiche Facture</title>
+    <!-- Link to Bootstrap CSS file -->
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+
+    <!-- Link to custom style CSS file -->
+    <link rel="stylesheet" type="text/css" href="../static/css/mon_style.css" th:href="@{/css/mon_style.css}" />
+</head>
+<body>
+    <section layout:fragment="content">
+        <div class="col-md-6 col-sm-6 col-xs-12 spacer col-md-offset-3" >
+            <div class="panel panel-default">
+                <div class="panel-heading">Saisie d'un facture </div>
+                <div class="panel-body">
+                    <form th:action="@{update3}" method="post" th:object="${facture}">
+   <div class="form-group">
+                            <label class="control-label">montant</label>
+                            <input class="form-control" type="text" th:field="*{montant}" />
+                            <span class="red" th:errors="*{montant}"></span>
+                        </div>
+
+						<div class="form-group">
+                            <label class="control-label">montantRegle</label>
+                            <input class="form-control" type="text" th:field="*{montantRegle}" />
+                            <span class="red" th:errors="*{montantRegle}"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="control-label">ClientId</label>
+                            <input class="form-control" type="text" th:field="*{client.id}" />
+                            <span class="red" th:errors="*{client.id}"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="control-label">DeviseId</label>
+                            <input class="form-control" type="text" th:field="*{devise.id}" />
+                            <span class="red" th:errors="*{devise.id}"></span>
+                        </div>
+    
+    
+    
+    <div>
+        <button class="btn btn-primary" type="submit">Enregistrer</button>
+    </div>
+</form>
+
+                </div>
+                <div class="panel-footer"> ----Gestion de stock--- </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
